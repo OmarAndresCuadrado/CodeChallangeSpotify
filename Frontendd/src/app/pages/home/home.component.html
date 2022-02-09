@@ -1,0 +1,108 @@
+<div class="all">
+    <div class="container">
+        <div style="padding-top: 20px;">
+
+        </div>
+
+        <div class="row text-center" style="padding-top: 20px;">
+            <div class="col-12">
+                <img src="../../../assets/images/spotify-logo.jpg" class="img-fluid" style="height: 300px;">
+            </div>
+        </div>
+        <div class="row text-center" style="padding-top: 20px;">
+            <div class="col-12">
+                <button class="btn btn-success btn-block" (click)="redirectToLoginPage()"> Redirect to login page
+                </button>
+            </div>
+        </div>
+
+        <div style="padding-top: 40px;"></div>
+        <div class="row text-center" style="padding-bottom: 40px;">
+            <div class="col-4">
+                <button type="button" class="btn btn-success" (click)="openCreateTrack()">Create Trak</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-success" (click)="openGetTrackById()">Get Track by isrc</button>
+            </div>
+            <div class="col-4">
+                <button type="button" class="btn btn-success" (click)="openGetAllTracks()">Get all tracks</button>
+            </div>
+        </div>
+
+
+        <div class="row text-center" *ngIf="onCreateTrack">
+            <form>
+                <div class="form-group">
+                    <input type="email" class="form-control" [(ngModel)]="isrc" name="isrc" id="isrc"
+                        placeholder="Example. GBAYE0601477">
+                    <div style="padding-top: 20px;"></div>
+                    <small id="emailHelp" class="form-text text-muted">Use the isrc that you want to percist on our
+                        database</small>
+                </div>
+                <div style="padding-top: 20px;"></div>
+                <button type="submit" class="btn btn-success" (click)="createTrack()">Send</button>
+            </form>
+            <div style="padding-bottom: 100px;"></div>
+        </div>
+
+        <div class="row text-center" *ngIf="onGetTrackById">
+            <form>
+                <div class="form-group">
+                    <input type="email" class="form-control" [(ngModel)]="isrc" name="isrc" id="isrc"
+                        placeholder="Example. USWB11403680">
+                    <div style="padding-top: 20px;"></div>
+                    <small id="emailHelp" class="form-text text-muted">Use the isrc for searching on the
+                        database</small>
+                </div>
+                <div style="padding-top: 20px;"></div>
+                <button type="submit" class="btn btn-success" (click)="getTrackById()">Send</button>
+            </form>
+            <div style="padding-bottom: 30px;"></div>
+
+            <div *ngIf="trackFound">
+                <div class="row">
+                    <div class="col-4"></div>   
+                    <div class="col-4 text-center">
+                        <div class="card text-white bg-dark" style="max-width: 25rem;">
+                            <img class="card-img-top" src="{{trackFound.trackImage}}" alt="Card image cap">
+                            <div class="card-header">iscr: {{trackFound.trackiscr}}</div>
+                            <div class="card-body">
+                                <h5 class="card-title">Track Name: {{trackFound.trackName}}</h5>
+                                <h5 class="card-title">Duration: {{trackFound.trackDuration}}</h5>
+                                <h5 class="card-title">Explicit: {{trackFound.trackExplicit}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4"></div>               
+                </div>
+            </div>
+
+            <div style="padding-bottom: 100px;"></div>
+        </div>
+
+        <div class="row text-center" *ngIf="onGetAllTracks">
+            <table class="table table-striped table-dark text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">isrc</th>
+                        <th scope="col">Track Name</th>
+                        <th scope="col">Track Duration</th>
+                        <th scope="col">Track Explicit</th>
+                        <th scope="col">Album Image</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let track of listOfTracks">
+                        <td>{{track.trackiscr}}</td>
+                        <td>{{track.trackName}}</td>
+                        <td>{{track.trackDuration}}</td>
+                        <td>{{track.trackExplicit}}</td>
+                        <td><img src="{{track.trackImage}}" class="img-fluid" style="height: 200px;"> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="padding-bottom: 100px;"></div>
+    </div>
+</div>
